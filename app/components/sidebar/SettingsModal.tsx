@@ -79,9 +79,21 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                             <div className="mt-2 flex items-center gap-x-3">
                                 <Image width="48" height="48" className="rounded-full" src={image || currentUser?.image || '/images/placeholder.jpg'} alt="Avatar" />
                                 <CldUploadButton options={{ maxFiles: 1 }} onSuccess={handleUpload} uploadPreset="libv2a7a">
-                                    <Button disabled={isLoading} secondary type="button">
+                                    <div className="
+                                        flex
+                                        justify-center
+                                        rounded-md
+                                        px-3
+                                        py-2
+                                        text-sm
+                                        font-semibold
+                                        focus-visible:outline
+                                        focus-visible:outline-2
+                                        focus-visible:outline-offset-2
+                                        text-gray-900
+                                    ">
                                         Change
-                                    </Button>
+                                    </div>
                                 </CldUploadButton>
                             </div>
                         </div>
