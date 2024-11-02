@@ -1,4 +1,5 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { pusherServer } from "@/app/libs/pusher";
 import { NextResponse } from "next/server";
 
 interface IParams {
@@ -54,8 +55,18 @@ export async function POST(
             }
         });
 
-        return NextResponse.json(updatedMessage);
+        await pusherServer.trigger(currentUser.email, 'conversation:update', {
+            id: conversationId,
+            messages: [updatedMessage]
+        })
 
+        if (lastMessage.seenIds.indexOf(currentUser.id) != -1) {
+            return NextResponse.json(conversation);
+        }
+
+        await pusherServer.trigger(conversationId!, 'message:update', updatedMessage);
+
+        return NextResponse.json(updatedMessage);
     } catch (error: any) {
         console.log(error, "ERROR_MESSAGES_SEEN");
         return new NextResponse("Internal Error", { status: 500 });
