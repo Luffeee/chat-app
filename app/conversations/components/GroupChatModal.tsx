@@ -66,10 +66,10 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                         Create a chat with more than 2 people.
                     </p>
                     <div className="mt-10 flex flex-col gap-y-8">
-                        <Input register={register} label="Name" id="name" disabled={isLoading} required errors={errors} />
+                        <Input register={register('name', { required: 'Name is required' })} label="Name" id="name" disabled={isLoading} required errors={errors} />
                         <Select disabled={isLoading} label="Members" options={users.map((user) => ({
                             value: user.id,
-                            label: user.name
+                            label: user.name || 'Unnamed'
                         }))}
                         onChange={(value) => setValue('members', value, {
                             shouldValidate: true
