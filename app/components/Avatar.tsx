@@ -12,7 +12,7 @@ const Avatar: React.FC<AvatarProps> = ({
     user
 }) => {
     const { members } = useActiveList();
-    const isActive = members.indexOf(user?.email!) != -1;
+    const isActive = user?.email ? members.includes(user.email) : false;
   return (
     <div className="relative">
         <div className="relative incline-block rounded-full overflow-hidden h-9 w-9 md:h-11 md:w-11">
@@ -29,4 +29,4 @@ const Avatar: React.FC<AvatarProps> = ({
   )
 }
 
-export default Avatar
+export default Avatar;

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 interface MobileItemsProps {
     href: string;
-    icon: any;
+    icon: React.ElementType;
     active?: boolean,
     onClick?: () => void;
 }
@@ -16,7 +16,7 @@ const MobileItem: React.FC<MobileItemsProps> = ({
         if (onClick) return onClick();
     }
   return (
-    <Link href={href} onClick={onClick} className={clsx(`
+    <Link href={href} onClick={handleClick} className={clsx(`
         group
         flex
         gap-x-3

@@ -1,13 +1,18 @@
 'use client';
 
 import React from "react";
-import ReactSelect from "react-select";
+import ReactSelect, { ActionMeta, MultiValue } from "react-select";
+
+interface OptionType {
+    label: string;
+    value: string | number;
+}
 
 interface SelectProps {
     label: string;
-    value?: Record<string, any>
-    onChange: (value: Record<string, any>) => void;
-    options: Record<string, any>[];
+    value?: MultiValue<OptionType>; // `value` should also be an array of OptionType for isMulti
+    onChange: (value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) => void;
+    options: OptionType[];
     disabled?: boolean;
 }
 
@@ -33,13 +38,11 @@ const Select: React.FC<SelectProps> = ({
                         zIndex: 9999
                     })
                 }}
-                classNames={{
-                    control: () => "text-sm"
-                }}
+                classNamePrefix="react-select"
             />
         </div>
     </div>
   )
 }
 
-export default Select
+export default Select;

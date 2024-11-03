@@ -91,10 +91,10 @@ const AuthForm = () => {
         <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 {variant === 'REGISTER' && (
-                    <Input id="name" label="Name" register={register} errors={errors} disabled={isLoading} />
+                    <Input id="name" label="Name" register={register('name', { required: 'Name is required' })} errors={errors} disabled={isLoading} />
                 )}
-                <Input id="email" label="Email Address" type="email" register={register} errors={errors} disabled={isLoading} />
-                <Input id="password" label="password" type="password" register={register} errors={errors} disabled={isLoading} />
+                <Input id="email" label="Email Address" type="email" register={register('email', { required: 'Name is required' })} errors={errors} disabled={isLoading} />
+                <Input id="password" label="password" type="password" register={register('password', { required: 'Name is required' })} errors={errors} disabled={isLoading} />
 
                 <div>
                     <Button disabled={isLoading} fullwidth type="submit">
