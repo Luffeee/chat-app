@@ -1,9 +1,10 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
 
 export async function DELETE(
+    request: NextRequest | Request,
     { params: { conversationId } }: { params: { conversationId: string } }
 ) {
     try {
