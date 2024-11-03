@@ -4,7 +4,6 @@ import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
 
 export async function DELETE(
-    request: Request,
     { params: { conversationId } }: { params: { conversationId: string } }
 ) {
     try {
