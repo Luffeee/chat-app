@@ -1,26 +1,22 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { pusherServer } from "@/app/libs/pusher";
 import { NextResponse } from "next/server";
-
-interface IParams {
-    conversationId?: string;
-};
+import prisma from "@/app/libs/prismadb"; // Ensure prisma is imported
 
 export async function POST(
     request: Request,
-    { params }: { params: IParams }
+    context: { params: Promise<{ conversationId: string }> }
 ) {
     try {
         const currentUser = await getCurrentUser();
-        const { conversationId } = params;
 
         if (!currentUser?.id || !currentUser?.email) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        const conversation = await prisma?.conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: {
-                id: conversationId
+                id: (await context.params).conversationId
             },
             include: {
                 messages: {
@@ -38,7 +34,7 @@ export async function POST(
 
         if (!lastMessage) return NextResponse.json(conversation);
 
-        const updatedMessage = await prisma?.message.update({
+        const updatedMessage = await prisma.message.update({
             where: {
                 id: lastMessage.id
             },
@@ -56,18 +52,19 @@ export async function POST(
         });
 
         await pusherServer.trigger(currentUser.email, 'conversation:update', {
-            id: conversationId,
+            id: (await context.params).conversationId,
             messages: [updatedMessage]
-        })
+        });
 
-        if (lastMessage.seenIds.indexOf(currentUser.id) != -1) {
+        if (lastMessage.seenIds.includes(currentUser.id)) {
             return NextResponse.json(conversation);
         }
 
-        await pusherServer.trigger(conversationId!, 'message:update', updatedMessage);
+        await pusherServer.trigger((await context.params).conversationId, 'message:update', updatedMessage);
 
         return NextResponse.json(updatedMessage);
-    } catch {
+    } catch (error) {
+        console.error("Error updating message:", error);
         return new NextResponse("Internal Error", { status: 500 });
     }
 }

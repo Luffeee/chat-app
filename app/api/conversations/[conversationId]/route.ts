@@ -4,10 +4,12 @@ import prisma from "@/app/libs/prismadb";
 import { pusherServer } from "@/app/libs/pusher";
 
 export async function DELETE(
-    request: NextRequest | Request,
-    { params: { conversationId } }: { params: { conversationId: string } }
+    request: NextRequest,
+    context: { params: Promise<{ conversationId: string }> }
 ) {
     try {
+        const { conversationId } = await context.params; // Await params to satisfy TypeScript
+
         const currentUser = await getCurrentUser();
 
         if (!currentUser?.id) {
