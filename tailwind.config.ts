@@ -12,7 +12,8 @@ const config: Config = {
   plugins: [
     require("@tailwindcss/forms")({
       strategy: 'class'
-    })
+    }),
+    require("tailwindcss-displaymodes")
   ],
 };
 export default config;
