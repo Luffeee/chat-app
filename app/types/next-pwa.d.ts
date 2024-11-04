@@ -1,3 +1,5 @@
+// next-pwa.d.ts
+
 declare module 'next-pwa' {
     import { NextConfig } from 'next';
     import { GenerateSWOptions, InjectManifestOptions } from 'workbox-build';
@@ -26,10 +28,10 @@ declare module 'next-pwa' {
       mode?: 'production' | 'development';
       publicExcludes?: string[];
       additionalManifestEntries?: string[];
-      runtimeCaching?: Array<any>;
-      manifestTransforms?: Array<any>;
-      additionalManifestEntriesTransform?: Array<any>;
-      additionalManifestTransforms?: Array<any>;
+      runtimeCaching?: Array<unknown>;
+      manifestTransforms?: Array<unknown>;
+      additionalManifestEntriesTransform?: Array<unknown>;
+      additionalManifestTransforms?: Array<unknown>;
       dynamicStartUrlRedirect?: string;
       generateSwOptions?: Partial<GenerateSWOptions>;
       injectManifestOptions?: Partial<InjectManifestOptions>;
