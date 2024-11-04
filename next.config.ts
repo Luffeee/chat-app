@@ -9,12 +9,12 @@ const nextConfig: NextConfig = {
       "lh3.googleusercontent.com"
     ]
   },
-  // Add any other Next.js configurations here
+  // Any other Next.js-specific configurations go here
 };
 
 export default withPWA({
-  dest: "public", // This specifies where the service worker will be generated
-  register: true, // Automatically registers the service worker
-  skipWaiting: true, // Activates the new service worker as soon as it’s available
-  ...nextConfig, // Spread existing configurations here
-});
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development", // Optional: Disable PWA in dev
+})(nextConfig);
