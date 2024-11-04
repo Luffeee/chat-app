@@ -1,0 +1,22 @@
+{
+    "name": "Chat App",
+    "short_name": "Chat",
+    "description": "A chat application for connecting with friends.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0a84ff",
+    "icons": [
+      {
+        "src": "/images/logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/images/logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
