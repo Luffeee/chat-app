@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+[Click here](https://github.com/Luffeee/chat-app) to view the GitHub repository.
+[Click here](https://oppochat-app.vercel.app/) For a preview of the chat app.
+
 ## Getting Started
 
 First, install the dependencies and add your environment variables.
